@@ -1,0 +1,154 @@
+﻿// 复现UG实验范式
+// created by Jiting Liu 刘继婷 21/11/2016
+// undate by Beyond Imagination 脑洞未知组 21/11/2016
+
+<item outcome>
+	/ 1= "proposer:80% responder:20%
+Rejection Outcome: 
+proposer:0% responder:0%"
+	/ 2= "proposer:80% responder:20%
+Rejection Outcome: 
+Rroposer:10% Oesponder:10%"
+	/ 3= "proposer:80% responder:20%
+Rejection Outcome: 
+proposer:20% responder:20%"
+	/ 4= "proposer:80% responder:20%
+Rejection Outcome: 
+proposer:30% responder:30%"
+</item>
+
+<item stakesize>
+	/ 1 = "stake:100NIS"
+	/ 2 = "stake:200NIS"
+</item>
+
+<text info>
+	/ items = ("Welcome to our Ultimatum Game!
+
+In this game, you will act as a proposer in one-time monetary distribution 
+between you and other participants act as responders, 
+who play the game in a different session of the experiment. 
+Your choice will directly influence payment you get after this experiment.
+
+Press any key to continue. ")
+	/ hjustify = left
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+    / fontstyle = ("Airals",5%)
+</text>
+
+<text instruction>
+	/ items = ("As a proposer, you will choose 
+a division from two, fair or unfair.
+
+ And responder have rights to reject unfair division. 
+If so, you both wil recieve equal stake ranging 
+randomly from 0 to 30 pct by computer.
+
+If you want to choose the proposal on the left, press F.
+If you want to choose the proposal on the right, press J.
+
+Press any key to continue.")
+	/ hjustify = left
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+    / fontstyle = ("Airals",5%)
+</text>
+
+<text goodbye>
+	/ items = ("Thanks for you participation. Please reach the experimenter.")
+	/ hjustify = center
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+    / fontstyle = ("Airals",5%)
+</text>
+
+<text stakesize>
+	/ items = stakesize
+	/ select = Replace
+	/ position = (50pct,10pct)
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+    / fontstyle = ("Airals",5%)
+</text>
+
+<text equalleft>
+	/items = ("proposer:50% responder:50%")
+	/ hposition = 30pct
+	/ fontstyle = ("Airals",5%)
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)	
+</text>
+
+<text equalright>
+	/items = ("proposer:50% responder:50%")
+	/ hposition = 70pct
+	/ fontstyle = ("Airals",5%)
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)	
+</text>
+
+<text unequalleft>
+	/ items = outcome
+	/ select = Replace
+	/ hposition = 30pct
+	/ fontstyle = ("Airals",5%)
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+</text>
+
+<text unequalright>
+	/ items = outcome
+	/ select = Replace
+	/ hposition = 70pct
+	/ fontstyle = ("Airals",5%)
+	/ txbgcolor = (255,255,255)
+	/ txcolor = (0,0,0)
+</text>
+
+<trial info>
+	/validresponse = (anyresponse)
+	/stimulusframes =[1=info]
+	/recorddata = false 
+</trial>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes =[1=instruction]
+	/recorddata = false 
+</trial>
+
+<trial goodbye>
+	/validresponse = (anyresponse)
+	/stimulusframes =[1=goodbye]
+	/recorddata = false 
+</trial>
+
+<trial left>
+	/ validresponse = ("F","J")
+    / stimulustimes = [1=equalleft,unequalright,stakesize]
+</trial>
+
+<trial right>
+	/ validresponse = ("F","J")
+    / stimulustimes = [1=equalright,unequalleft,stakesize]
+</trial>
+
+<block insturction>
+	/ trials = [1=info;2=instruction]
+	/ screencolor = (255,255,255)
+</block>
+
+<block ug>
+	/ trials = [1-8=replace(left,right)]
+    / screencolor = (255,255,255)
+</block>
+
+<block goodbye>
+	/ trials = [1=goodbye]
+    / screencolor = (255,255,255)
+</block>
+
+<expt ug>
+	/ blocks = [1=insturction;2=ug;3=goodbye]
+</expt>
